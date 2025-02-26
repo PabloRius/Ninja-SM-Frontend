@@ -2,7 +2,7 @@
 
 import ProductCard from "@/components/ProductCard";
 import ProductCardSkeleton from "@/components/ProductCardSkeleton";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useAlert } from "@/context/AlertContext";
 import { useProducts } from "@/hooks/useProducts";
 import { useEffect, useState } from "react";
 
@@ -10,6 +10,7 @@ export default function ProductsPage() {
   const [search, setSearch] = useState("");
   const [supermarket, setSupermarket] = useState("");
   const [page, setPage] = useState(1);
+  const { showAlert } = useAlert();
 
   const { products, loading, hasMore, error } = useProducts(
     search,
@@ -20,6 +21,11 @@ export default function ProductsPage() {
   useEffect(() => {
     setPage(1);
   }, [search, supermarket]);
+
+  useEffect(() => {
+    if (!error) return;
+    showAlert(error, "error");
+  }, [error, showAlert]);
 
   return (
     <main className="flex-1 container mx-auto px-4 pt-24 pb-10">
@@ -68,13 +74,6 @@ export default function ProductsPage() {
           Next
         </button>
       </div>
-      {/* Alert */}
-      {error && (
-        <Alert>
-          <AlertTitle>Heads up!</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
     </main>
   );
 }
