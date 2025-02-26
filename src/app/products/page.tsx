@@ -2,50 +2,20 @@
 
 import ProductCard from "@/components/ProductCard";
 import ProductCardSkeleton from "@/components/ProductCardSkeleton";
-import { Product } from "@/models/Product";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useProducts } from "@/hooks/useProducts";
 import { useEffect, useState } from "react";
 
-const debounce = <T extends (...args: never[]) => void>(
-  func: T,
-  delay: number
-): ((...args: Parameters<T>) => void) => {
-  let timeoutId: NodeJS.Timeout;
-
-  return (...args: Parameters<T>) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func(...args), delay);
-  };
-};
-
 export default function ProductsPage() {
-  const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
   const [supermarket, setSupermarket] = useState("");
   const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
 
-  const fetchProducts = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `http://localhost:9090/dev/product?name=${search}&supermarket=${supermarket}&minPrice=1&maxPrice=9999&page=${page}&limit=20`
-      );
-      const data = await response.json();
-      setProducts(data.data);
-      setHasMore(data.page < data.totalPages);
-    } catch (error) {
-      console.error("Failed to fetch products:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const debouncedFetchProducts = debounce(fetchProducts, 700);
-
-  useEffect(() => {
-    debouncedFetchProducts();
-  }, [search, supermarket, page]);
+  const { products, loading, hasMore, error } = useProducts(
+    search,
+    supermarket,
+    page
+  );
 
   useEffect(() => {
     setPage(1);
@@ -72,7 +42,6 @@ export default function ProductsPage() {
           <option value="Sainsbury's">{"Sainsbury's"}</option>
         </select>
       </div>
-
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {loading
@@ -81,7 +50,6 @@ export default function ProductsPage() {
               <ProductCard key={index} product={product} />
             ))}
       </div>
-
       {/* Pagination */}
       <div className="mt-6 flex justify-center">
         <button
@@ -100,6 +68,13 @@ export default function ProductsPage() {
           Next
         </button>
       </div>
+      {/* Alert */}
+      {error && (
+        <Alert>
+          <AlertTitle>Heads up!</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
     </main>
   );
 }
