@@ -12,6 +12,9 @@ export const useProducts = (
   const [hasMore, setHasMore] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const baseUrl =
+    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:9090";
+
   const fetchProducts = useCallback(
     async (search: string, supermarket: string, page: number) => {
       setLoading(true);
@@ -19,7 +22,7 @@ export const useProducts = (
       try {
         console.log("Fetching data from server");
         const response = await fetch(
-          `http://localhost:9090/dev/product?name=${search}&supermarket=${supermarket}&minPrice=1&maxPrice=9999&page=${page}&limit=20`
+          `${baseUrl}/dev/product?name=${search}&supermarket=${supermarket}&minPrice=1&maxPrice=9999&page=${page}&limit=20`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch products");
