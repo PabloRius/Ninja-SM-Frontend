@@ -38,14 +38,14 @@ export const useProducts = (
   );
 
   const debouncedFetchProducts = useMemo(
-    () => debounce(fetchProducts, 500), // Memoize debounce
-    [fetchProducts] // Depend only on fetchProducts
+    () => debounce(fetchProducts, 500),
+    [fetchProducts]
   );
 
   useEffect(() => {
     debouncedFetchProducts(search, supermarket, page);
     return () => {
-      debouncedFetchProducts.cancel(); // Clean up debounce on unmount
+      debouncedFetchProducts.cancel();
     };
   }, [search, supermarket, page, debouncedFetchProducts]);
 
