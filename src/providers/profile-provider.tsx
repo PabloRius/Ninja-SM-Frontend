@@ -1,7 +1,7 @@
 "use client";
 
 import { ProfileContext, ProfileContextType } from "@/contexts/profile-context";
-import type { User } from "@prisma/client";
+import type { User } from "@/schemas";
 import { signOut, useSession } from "next-auth/react";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
