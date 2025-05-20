@@ -28,7 +28,7 @@ export const SupermarketFilter = ({
         <SelectContent>
           <SelectItem value="all">All Supermarkets</SelectItem>
           <SelectItem value="tesco">Tesco</SelectItem>
-          <SelectItem value="sainsburys">Sainsbury's</SelectItem>
+          <SelectItem value="sainsburys">Sainsbury&apos;s</SelectItem>
           <SelectItem value="asda">Asda</SelectItem>
           <SelectItem value="morrisons">Morrisons</SelectItem>
           <SelectItem value="waitrose">Waitrose</SelectItem>

@@ -62,7 +62,8 @@ export default function ProductGrid({
       <div className="text-center py-12">
         <h2 className="text-2xl font-semibold mb-2">No products found</h2>
         <p className="text-muted-foreground">
-          Try adjusting your search or filters to find what you're looking for.
+          Try adjusting your search or filters to find what you&apos;re looking
+          for.
         </p>
       </div>
     );
