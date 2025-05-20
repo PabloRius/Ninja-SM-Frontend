@@ -64,7 +64,7 @@ export function RegisterForm() {
       });
 
       router.push("/login");
-    } catch (error) {
+    } catch {
       toast.error("Registration failed", {
         description: "There was a problem creating your account.",
       });
