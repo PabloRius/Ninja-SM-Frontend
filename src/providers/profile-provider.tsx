@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 
 export function ProfileProvider({ children }: { children: ReactNode }) {
-  const { status, data } = useSession();
+  const { status } = useSession();
   const [profile, setProfile] = useState<User | null>(null);
 
   useEffect(() => {
