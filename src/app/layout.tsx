@@ -1,6 +1,7 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { ProfileProvider } from "@/providers/profile-provider";
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
@@ -43,6 +44,7 @@ export default function RootLayout({
             <Footer />
           </ProfileProvider>
         </SessionProvider>
+        <Analytics />
       </body>
     </html>
   );
