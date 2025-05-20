@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   const page = parseInt(searchParams.get("page") || "1", 10);
   const limit = parseInt(searchParams.get("limit") || "20", 10);
 
-  const filters: Record<string, {}> = {};
+  const filters: Record<string, Record<string, string | number> | string> = {};
 
   if (query) {
     filters.name = { contains: query, mode: "insensitive" };
@@ -25,11 +25,19 @@ export async function GET(request: NextRequest) {
   }
 
   if (minPrice) {
-    filters.price = { ...filters.price, gte: parseFloat(minPrice) };
+    filters.price = { gte: parseFloat(minPrice) };
   }
 
   if (maxPrice) {
-    filters.price = { ...filters.price, lte: parseFloat(maxPrice) };
+    const prevPriceFilter:
+      | Record<string, string | number>
+      | string
+      | undefined = filters.price || undefined;
+    if (prevPriceFilter && typeof prevPriceFilter !== "string") {
+      filters.price = { ...prevPriceFilter, lte: parseFloat(maxPrice) };
+    } else {
+      filters.price = { lte: parseFloat(maxPrice) };
+    }
   }
 
   let orderBy: Prisma.ProductOrderByWithRelationInput | undefined = undefined;
