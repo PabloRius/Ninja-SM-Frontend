@@ -1,4 +1,5 @@
 import prisma from "@/prisma";
+import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { product } from "../../../../prisma/product";
 
@@ -34,7 +35,7 @@ export async function GET(request: NextRequest) {
     filters.price = { ...filters.price, lte: parseFloat(maxPrice) };
   }
 
-  let orderBy: any = undefined;
+  let orderBy: Prisma.ProductOrderByWithRelationInput | undefined = undefined;
 
   switch (sort) {
     case "price-asc":
