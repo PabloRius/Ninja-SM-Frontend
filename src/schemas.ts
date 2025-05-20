@@ -1,6 +1,5 @@
 import { Prisma } from "@prisma/client";
 import { z } from "zod";
-import { product } from "../prisma/product";
 
 // At least 8 chars, 1 uppercase, 1 lowercase, 1 digit, 1 special char
 const passwordRegex =
@@ -27,4 +26,4 @@ export const registerSchema = z.object({
 export type LoginSchema = z.infer<typeof loginSchema>;
 export type RegisterSchema = z.infer<typeof registerSchema>;
 export type User = Prisma.UserGetPayload<{ omit: { password: true } }>;
-export type Product = Prisma.ProductGetPayload<typeof product>;
+export type Product = Prisma.ProductGetPayload<{}>;
