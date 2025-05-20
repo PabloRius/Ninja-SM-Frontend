@@ -1,12 +1,11 @@
 "use client";
+import { User } from "@/schemas";
 import { createContext } from "react";
-import { User } from "../../prisma/user";
 
 type BaseProfileContextType = {
   profile: null | { name: string };
   isLoggedIn: boolean;
   logout: () => void;
-  login: () => void;
 };
 
 type LoggedContextType = BaseProfileContextType & {
@@ -23,5 +22,4 @@ export const ProfileContext = createContext<ProfileContextType>({
   profile: null,
   isLoggedIn: false,
   logout: () => {},
-  login: () => {},
 });

@@ -35,13 +35,11 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
         profile,
         isLoggedIn: true,
         logout: () => signOut(),
-        login: () => {},
       }
     : {
         profile: null,
         isLoggedIn: false,
         logout: () => signOut(),
-        login: () => {},
       };
 
   return (
