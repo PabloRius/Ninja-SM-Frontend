@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import prisma from "@/prisma";
 import { NextResponse } from "next/server";
-import { user as userGet } from "../../../../prisma/user";
 
 export async function GET() {
   const session = await auth();
@@ -11,7 +10,6 @@ export async function GET() {
   }
 
   const user = await prisma.user.findUnique({
-    ...userGet,
     where: { id: session.user.id },
   });
 
