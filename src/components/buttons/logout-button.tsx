@@ -7,7 +7,7 @@ export const LogoutButton = ({ onClick }: { onClick?: () => void }) => {
       className="text-sm text-left text-red-500 hover:text-red-600 transition-colors"
       onClick={() => {
         logout();
-        onClick && onClick();
+        if (onClick) onClick();
       }}
     >
       Log out
