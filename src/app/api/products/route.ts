@@ -1,7 +1,6 @@
 import prisma from "@/prisma";
 import { Prisma } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { product } from "../../../../prisma/product";
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
@@ -68,7 +67,6 @@ export async function GET(request: NextRequest) {
       orderBy,
       skip,
       take: limit,
-      ...product,
     });
 
     return NextResponse.json(products);
