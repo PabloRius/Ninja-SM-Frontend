@@ -13,11 +13,8 @@ export async function GET(request: NextRequest) {
   const sort = searchParams.get("sort") || "relevance";
   const page = parseInt(searchParams.get("page") || "1", 10);
   const limit = parseInt(searchParams.get("limit") || "20", 10);
-  const test = await prisma.product.findMany({
-    take: limit,
-  });
-  console.log(test);
-  const filters: any = {};
+
+  const filters: Record<string, {}> = {};
 
   if (query) {
     filters.name = { contains: query, mode: "insensitive" };
