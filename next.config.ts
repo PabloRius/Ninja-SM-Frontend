@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [{ hostname: "digitalcontent.api.tesco.com" }],
+  },
 };
 
 export default nextConfig;
