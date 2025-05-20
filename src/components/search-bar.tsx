@@ -36,7 +36,6 @@ export default function SearchBar({
     initialMaxPrice ? Number.parseFloat(initialMaxPrice) : 100,
   ]);
   const [sort, setSort] = useState(initialSort);
-  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
   const applyFilters = () => {
     const params = new URLSearchParams(searchParams.toString());
@@ -103,7 +102,6 @@ export default function SearchBar({
                 type="button"
                 variant="outline"
                 className="flex items-center gap-2"
-                onClick={() => setIsFiltersVisible(true)}
               >
                 <Filter className="h-4 w-4" />
                 <span className="hidden sm:inline">Filters</span>
