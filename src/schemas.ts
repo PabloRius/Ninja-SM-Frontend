@@ -26,4 +26,4 @@ export const registerSchema = z.object({
 export type LoginSchema = z.infer<typeof loginSchema>;
 export type RegisterSchema = z.infer<typeof registerSchema>;
 export type User = Prisma.UserGetPayload<{ omit: { password: true } }>;
-export type Product = Prisma.ProductGetPayload<{}>;
+export type { Product } from "@prisma/client";
